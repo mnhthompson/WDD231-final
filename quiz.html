@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Personality Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Discover Your Pokémon Match!</h1>
+  </header>
+
+  <main class="quiz-container">
+    <form id="quizForm">
+      <label>What's your ideal environment?
+        <select name="environment">
+          <option value="forest">Forest</option>
+          <option value="mountains">Mountains</option>
+          <option value="ocean">Ocean</option>
+          <option value="city">City</option>
+        </select>
+      </label>
+
+      <label>Pick a personality trait:
+        <select name="trait">
+          <option value="brave">Brave</option>
+          <option value="calm">Calm</option>
+          <option value="playful">Playful</option>
+          <option value="loyal">Loyal</option>
+        </select>
+      </label>
+
+      <label>Choose your favorite color:
+        <select name="color">
+          <option value="red">Red</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="yellow">Yellow</option>
+        </select>
+      </label>
+
+      <button type="submit">Find My Pokémon!</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </main>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
