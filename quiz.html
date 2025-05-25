@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon Personality Quiz</title>
   <link rel="stylesheet" href="styles.css">
+   <script src="scripts/quiz.js"></script>
 </head>
 <body>
   <header>
@@ -13,14 +14,28 @@
 
   <main class="quiz-container">
     <form id="quizForm">
-      <label>What's your ideal environment?
-        <select name="environment">
-          <option value="forest">Forest</option>
-          <option value="mountains">Mountains</option>
-          <option value="ocean">Ocean</option>
-          <option value="city">City</option>
-        </select>
-      </label>
+<label>What's your ideal environment?
+  <select name="environment">
+    <option value="forest">Forest</option> <!-- Grass type -->
+    <option value="mountains">Mountains</option> <!-- Rock type -->
+    <option value="ocean">Ocean</option> <!-- Water type -->
+    <option value="city">City</option> <!-- Electric type -->
+    <option value="desert">Desert</option> <!-- Ground type -->
+    <option value="cave">Cave</option> <!-- Dark type -->
+    <option value="swamp">Swamp</option> <!-- Poison type -->
+    <option value="plains">Plains</option> <!-- Normal type -->
+    <option value="tundra">Tundra</option> <!-- Ice type -->
+    <option value="jungle">Jungle</option> <!-- Bug type -->
+    <option value="volcano">Volcano</option> <!-- Fire type -->
+    <option value="river">Cliffs</option> <!-- Flying type -->
+    <option value="beach">Forest Alcove</option> <!-- Fairy type -->
+    <option value="grassland">Grassland</option> <!-- Fighting type -->
+    <option value="urban">Urban</option> <!-- Steel type -->
+    <option value="mountain_peak">Mountain Peak</option> <!-- Psychic type -->
+  </select>
+</label>
+
+
 
       <label>Pick a personality trait:
         <select name="trait">
@@ -46,6 +61,6 @@
     <div id="result" class="result"></div>
   </main>
 
-  <script src="quiz.js"></script>
+ 
 </body>
 </html>
