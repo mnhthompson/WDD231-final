@@ -26,12 +26,44 @@ async function displayPokemon() {
   const type = await getPokemonType(answers);
   const name = await fetchRandomPokemonByType(type);
 
-  // Display on page
-  document.getElementById('pokemonName').innerText = name.toUpperCase();
-  document.getElementById('pokemonType').innerText = type;
-  document.getElementById('pokemonImage').src =
-    `https://img.pokemondb.net/artwork/large/${name}.jpg`;
-  document.getElementById('pokemonImage').alt = name;
+  const pokeRes = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  const pokeData = await pokeRes.json();
+
+  // Display name and image
+  document.getElementById('pokemonName').innerText = pokeData.name.toUpperCase();
+  document.getElementById('pokemonImage').src = pokeData.sprites.other['official-artwork'].front_default;
+  document.getElementById('pokemonImage').alt = pokeData.name;
+
+  // Display types
+  const types = pokeData.types.map(t => t.type.name).join(', ');
+  document.getElementById('pokemonTypes').innerText = types;
+
+  // Abilities
+  const abilities = pokeData.abilities.map(a => a.ability.name).join(', ');
+  document.getElementById('pokemonAbilities').innerText = abilities;
+
+  // Stats
+  const statsList = document.getElementById('pokemonStats');
+  statsList.innerHTML = '';
+  pokeData.stats.forEach(stat => {
+    const li = document.createElement('li');
+    li.textContent = `${stat.stat.name}: ${stat.base_stat}`;
+    statsList.appendChild(li);
+  });
+
+  // Height & Weight (convert to meters and kg)
+  document.getElementById('pokemonHeight').innerText = `${pokeData.height / 10} m`;
+  document.getElementById('pokemonWeight').innerText = `${pokeData.weight / 10} kg`;
+
+  // Held Items
+  const items = pokeData.held_items.length > 0
+    ? pokeData.held_items.map(i => i.item.name).join(', ')
+    : 'None';
+  document.getElementById('pokemonItems').innerText = items;
+
+  // Sample Moves (limit to 5)
+  const sampleMoves = pokeData.moves.slice(0, 5).map(m => m.move.name).join(', ');
+  document.getElementById('pokemonMoves').innerText = sampleMoves;
 }
 
 displayPokemon();
