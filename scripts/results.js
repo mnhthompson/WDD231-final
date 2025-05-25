@@ -69,18 +69,30 @@ function showPreviousResults() {
 
 // Main function to load current Pokémon and show previous
 async function main() {
-  const name = getQueryParam("pokemon");
+  let name = getQueryParam("pokemon");
+
+  // If no name is provided or invalid, fallback to Klang
   if (!name) {
-    document.getElementById("pokemon-result").textContent = "No Pokémon specified in URL.";
-    showPreviousResults();
-    return;
+    name = "klang";
   }
 
   try {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-    if (!res.ok) throw new Error("Pokémon not found.");
-    const data = await res.json();
+    
+    // If fetch fails (bad name), fallback to Klang
+    if (!res.ok) {
+      const fallback = await fetch("https://pokeapi.co/api/v2/pokemon/klang");
+      if (!fallback.ok) throw new Error("Fallback Pokémon not found.");
+      const fallbackData = await fallback.json();
 
+      document.title = `KLANG | Pokémon Quiz Result`;
+      renderPokemon(fallbackData);
+      saveResult(fallbackData);
+      showPreviousResults();
+      return;
+    }
+
+    const data = await res.json();
     document.title = `${data.name.toUpperCase()} | Pokémon Quiz Result`;
     renderPokemon(data);
     saveResult(data);
@@ -90,5 +102,6 @@ async function main() {
     showPreviousResults();
   }
 }
+
 
 main();
