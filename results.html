@@ -2,24 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Pokémon Result</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pokémon Result</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-  <main id="resultTemplate">
-    <h1>Your Pokémon Match:</h1>
-    <div class="pokemon-card">
-      <h2 id="pokemonName">Loading...</h2>
-      <img id="pokemonImage" alt="Pokémon image" />
-      <p><strong>Type(s):</strong> <span id="pokemonTypes"></span></p>
-      <p><strong>Abilities:</strong> <span id="pokemonAbilities"></span></p>
-      <p><strong>Base Stats:</strong></p>
-      <ul id="pokemonStats"></ul>
-      <p><strong>Height:</strong> <span id="pokemonHeight"></span></p>
-      <p><strong>Weight:</strong> <span id="pokemonWeight"></span></p>
-      <p><strong>Held Items:</strong> <span id="pokemonItems"></span></p>
-      <p><strong>Sample Moves:</strong> <span id="pokemonMoves"></span></p>
-    </div>
+  <header>
+    <h1>Pokémon Quiz Result</h1>
+  </header>
+
+  <main>
+    <section id="pokemon-result"></section>
+
+    <section>
+      <h2>Your Previous Results</h2>
+      <ul id="previous-results-list"></ul>
+    </section>
   </main>
 
   <script src="result.js"></script>
