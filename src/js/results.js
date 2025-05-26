@@ -4,12 +4,12 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
-// Save result in localStorage (instead of cookie for more space)
+// Save result in localStorage (stores up to 10 recent results)
 function saveResult(pokemonData) {
   const stored = localStorage.getItem("pokemonResults");
   const results = stored ? JSON.parse(stored) : [];
 
-  // Avoid duplicates by Pokémon name; keep last 10
+  // Avoid duplicates, keep last 10
   const filtered = results.filter(r => r.name !== pokemonData.name);
   filtered.push({
     name: pokemonData.name,
@@ -23,7 +23,7 @@ function saveResult(pokemonData) {
   localStorage.setItem("pokemonResults", JSON.stringify(last10));
 }
 
-// Render Pokémon full details
+// Render Pokémon result to page
 function renderPokemon(data) {
   const container = document.getElementById("pokemon-result");
   container.innerHTML = `
@@ -46,62 +46,59 @@ function renderPokemon(data) {
         ${data.moves.slice(0, 10).map(m => `<li>${m.move.name}</li>`).join("")}
       </ul>
 
-      ${data.held_items.length ? `<h3>Held Items</h3><ul>${data.held_items.map(i => `<li>${i.item.name}</li>`).join("")}</ul>` : ""}
+      ${data.held_items.length ? `
+        <h3>Held Items</h3>
+        <ul>${data.held_items.map(i => `<li>${i.item.name}</li>`).join("")}</ul>
+      ` : ""}
     </div>
   `;
 }
 
-// Display list of previous results as clickable links
+// Show clickable list of previous results
 function showPreviousResults() {
   const ul = document.getElementById("previous-results-list");
   const stored = localStorage.getItem("pokemonResults");
+
   if (!stored) {
     ul.innerHTML = "<li>No previous results found.</li>";
     return;
   }
 
-  const results = JSON.parse(stored).slice().reverse(); // latest first
-
+  const results = JSON.parse(stored).slice().reverse(); // Show latest first
   ul.innerHTML = results.map(p => 
-    `<li><a href="result.html?pokemon=${p.name}">${p.name.toUpperCase()} (#${p.id}) - ${new Date(p.date).toLocaleDateString()}</a></li>`
+    `<li><a href="result.html?pokemon=${encodeURIComponent(p.name)}">${p.name.toUpperCase()} (#${p.id}) - ${new Date(p.date).toLocaleDateString()}</a></li>`
   ).join("");
 }
 
-// Main function to load current Pokémon and show previous
-async function main() {
-  let name = getQueryParam("pokemon");
-
-  // If no name is provided or invalid, fallback to Klang
-  if (!name) {
-    name = "klang";
-  }
-
+// Fetch and render Pokémon by name, fallback to Klang
+async function loadPokemonByName(name) {
   try {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
-    
-    // If fetch fails (bad name), fallback to Klang
-    if (!res.ok) {
-      const fallback = await fetch("https://pokeapi.co/api/v2/pokemon/klang");
-      if (!fallback.ok) throw new Error("Fallback Pokémon not found.");
-      const fallbackData = await fallback.json();
-
-      document.title = `KLANG | Pokémon Quiz Result`;
-      renderPokemon(fallbackData);
-      saveResult(fallbackData);
-      showPreviousResults();
-      return;
-    }
-
+    if (!res.ok) throw new Error("Not found");
     const data = await res.json();
-    document.title = `${data.name.toUpperCase()} | Pokémon Quiz Result`;
-    renderPokemon(data);
-    saveResult(data);
-    showPreviousResults();
-  } catch (e) {
-    document.getElementById("pokemon-result").textContent = e.message;
-    showPreviousResults();
+    return data;
+  } catch {
+    const fallback = await fetch("https://pokeapi.co/api/v2/pokemon/klang");
+    if (!fallback.ok) throw new Error("Fallback Pokémon not found.");
+    return await fallback.json();
   }
 }
 
+// Main entry
+async function main() {
+  let name = getQueryParam("pokemon") || "klang";
+  try {
+    const data = await loadPokemonByName(name);
+    document.title = `${data.name.toUpperCase()} | Pokémon Quiz Result`;
+    renderPokemon(data);
+    saveResult(data);
+  } catch (e) {
+    document.getElementById("pokemon-result").textContent = e.message;
+  }
+
+  showPreviousResults();
+}
 
 main();
+
+window.addEventListener('DOMContentLoaded', main);
