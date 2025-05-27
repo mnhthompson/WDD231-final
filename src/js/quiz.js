@@ -25,9 +25,9 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
       : { name: 'klang' };
 
     // Go to result page with only Pokémon name
-    window.location.href = `result.html?pokemon=${selected.name}`;
+    window.location.href = `results.html?pokemon=${selected.name}`;
   } catch (error) {
     console.error("Failed to fetch Pokémon:", error);
-    window.location.href = `result.html?pokemon=klang`; // fallback on error
+    window.location.href = `results.html?pokemon=klang`; // fallback on error
   }
 });
