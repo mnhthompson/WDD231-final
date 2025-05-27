@@ -37,11 +37,11 @@ function renderPokemon(data) {
         Your browser does not support the audio element.
         </audio>
       <div class="pokemon-info">
-        <p><strong>🧬 Types:</strong> ${data.types.map(t => t.type.name).join(", ")}</p>
-        <p><strong>✨ Abilities:</strong> ${data.abilities.map(a => a.ability.name).join(", ")}</p>
-        <p><strong>📏 Height:</strong> ${(data.height / 10).toFixed(1)} m</p>
-        <p><strong>⚖️ Weight:</strong> ${(data.weight / 10).toFixed(1)} kg</p>
-        <p><strong>⭐ Base Experience:</strong> ${data.base_experience}</p>
+        <p><strong> Types:</strong> ${data.types.map(t => t.type.name).join(", ")}</p>
+        <p><strong> Abilities:</strong> ${data.abilities.map(a => a.ability.name).join(", ")}</p>
+        <p><strong> Height:</strong> ${(data.height / 10).toFixed(1)} m</p>
+        <p><strong> Weight:</strong> ${(data.weight / 10).toFixed(1)} kg</p>
+        <p><strong> Base Experience:</strong> ${data.base_experience}</p>
       </div>
     </div>
 
