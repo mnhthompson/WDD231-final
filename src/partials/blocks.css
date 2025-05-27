@@ -1,3 +1,15 @@
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .pokemon-card {
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius);
@@ -6,6 +18,9 @@
   background: white;
   box-shadow: var(--shadow);
   margin-top: 2rem;
+  margin: 0 auto;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
 }
 
 .pokemon-card img {
@@ -13,4 +28,5 @@
   height: auto;
   margin-top: 1em;
 }
+
 
