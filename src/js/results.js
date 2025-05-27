@@ -27,30 +27,47 @@ function saveResult(pokemonData) {
 function renderPokemon(data) {
   const container = document.getElementById("pokemon-result");
   container.innerHTML = `
-    <div class="pokemon-card">
-      <h2>${data.name.toUpperCase()} (#${data.id})</h2>
-      <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}" />
-      <p><strong>Types:</strong> ${data.types.map(t => t.type.name).join(", ")}</p>
-      <p><strong>Abilities:</strong> ${data.abilities.map(a => a.ability.name).join(", ")}</p>
-      <p><strong>Height:</strong> ${(data.height / 10).toFixed(1)} m</p>
-      <p><strong>Weight:</strong> ${(data.weight / 10).toFixed(1)} kg</p>
-      <p><strong>Base Experience:</strong> ${data.base_experience}</p>
+<div class="pokemon-card">
+    <h2 class="pokemon-name">${data.name.toUpperCase()} <span class="pokemon-id">#${data.id}</span></h2>
 
-      <h3>Stats</h3>
-      <ul>
-        ${data.stats.map(stat => `<li>${stat.stat.name}: ${stat.base_stat}</li>`).join("")}
+    <div class="pokemon-main">
+      <img src="${data.sprites.other['official-artwork'].front_default}" alt="${data.name}" class="pokemon-image" />
+        <audio controls class="pokemon-cry">
+        <source src="https://play.pokemonshowdown.com/audio/cries/${data.name.toLowerCase()}.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+        </audio>
+      <div class="pokemon-info">
+        <p><strong>🧬 Types:</strong> ${data.types.map(t => t.type.name).join(", ")}</p>
+        <p><strong>✨ Abilities:</strong> ${data.abilities.map(a => a.ability.name).join(", ")}</p>
+        <p><strong>📏 Height:</strong> ${(data.height / 10).toFixed(1)} m</p>
+        <p><strong>⚖️ Weight:</strong> ${(data.weight / 10).toFixed(1)} kg</p>
+        <p><strong>⭐ Base Experience:</strong> ${data.base_experience}</p>
+      </div>
+    </div>
+
+    <div class="pokemon-section">
+      <h3>📊 Stats</h3>
+      <ul class="stat-list">
+        ${data.stats.map(stat => `<li><strong>${stat.stat.name}:</strong> ${stat.base_stat}</li>`).join("")}
       </ul>
+    </div>
 
-      <h3>Moves (first 10)</h3>
-      <ul>
+    <div class="pokemon-section">
+      <h3>🎯 Moves (Top 10)</h3>
+      <ul class="move-list">
         ${data.moves.slice(0, 10).map(m => `<li>${m.move.name}</li>`).join("")}
       </ul>
-
-      ${data.held_items.length ? `
-        <h3>Held Items</h3>
-        <ul>${data.held_items.map(i => `<li>${i.item.name}</li>`).join("")}</ul>
-      ` : ""}
     </div>
+
+    ${data.held_items.length ? `
+      <div class="pokemon-section">
+        <h3>🎒 Held Items</h3>
+        <ul class="item-list">
+          ${data.held_items.map(i => `<li>${i.item.name}</li>`).join("")}
+        </ul>
+      </div>
+    ` : ""}
+  </div>
   `;
 }
 
