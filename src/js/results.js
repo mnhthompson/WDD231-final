@@ -83,7 +83,7 @@ function showPreviousResults() {
 
   const results = JSON.parse(stored).slice().reverse(); // Show latest first
   ul.innerHTML = results.map(p => 
-    `<li><a href="result.html?pokemon=${encodeURIComponent(p.name)}">${p.name.toUpperCase()} (#${p.id}) - ${new Date(p.date).toLocaleDateString()}</a></li>`
+    `<li><a href="results.html?pokemon=${encodeURIComponent(p.name)}">${p.name.toUpperCase()} (#${p.id}) - ${new Date(p.date).toLocaleDateString()}</a></li>`
   ).join("");
 }
 
