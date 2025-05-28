@@ -28,40 +28,35 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
   const trait = form.trait.value.trim().toLowerCase();
   const color = form.color.value.trim().toLowerCase();
 
-  const type = environmentTypeMap[environment] || "steel"; // fallback if map fails
+  const type = environmentTypeMap[environment] || "steel"; // fallback
 
   const userAnswers = { type , trait };
   localStorage.setItem('quizAnswers', JSON.stringify(userAnswers));
 
-
-  
-
-
   try {
-    // Fetch full Pokémon list (names and URLs)
-    const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
-    const typeData = await res.json();
-    const allPokemon =  typeData.pokemon.map(p => p.pokemon);
+    // Fetch Pokémon by type 
+    const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    if (!res.ok) throw new Error("Failed to fetch type data");
 
-    // Flexible filtering logic: checks if name contains either value
+    const typeData = await res.json();
+    const allPokemon = typeData.pokemon.map(p => p.pokemon); // array of { name, url }
+
+    // Filter by type included in name 
     const filtered = allPokemon.filter(pokemon =>
-        pokemon.name.includes(type) 
+      pokemon.name.includes(type) // || pokemon.name.includes(trait) || pokemon.name.includes(color)
     );
 
-    // || pokemon.name.includes(trait) || pokemon.name.includes(color)
-
-    // Pick random from filtered list or default to Klang
     const selected = filtered.length > 0
       ? filtered[Math.floor(Math.random() * filtered.length)]
       : { name: 'klang' };
 
-    // Go to result page with only Pokémon name
     window.location.href = `results.html?pokemon=${selected.name}`;
   } catch (error) {
     console.error("Failed to fetch Pokémon:", error);
-    window.location.href = `results.html?pokemon=klang`; // fallback on error
+    window.location.href = `results.html?pokemon=klang`;
   }
 });
+
 
 
 
