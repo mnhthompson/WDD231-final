@@ -18,8 +18,6 @@ const environmentTypeMap = {
   mountain_peak: "psychic"
 };
 
-
-
 document.getElementById('quizForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -28,27 +26,51 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
   const trait = form.trait.value.trim().toLowerCase();
   const color = form.color.value.trim().toLowerCase();
 
-  const type = environmentTypeMap[environment] || "steel"; // fallback
+  const type = environmentTypeMap[environment] || "steel";
 
   const userAnswers = { type , trait };
   localStorage.setItem('quizAnswers', JSON.stringify(userAnswers));
 
   try {
-    // Fetch Pokémon by type 
     const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
-    if (!res.ok) throw new Error("Failed to fetch type data");
 
     const typeData = await res.json();
     const allPokemon = typeData.pokemon.map(p => p.pokemon); // array of { name, url }
 
     // Filter by type included in name 
     const filtered = allPokemon.filter(pokemon =>
-      pokemon.name.includes(type) // || pokemon.name.includes(trait) || pokemon.name.includes(color)
+      pokemon.name.includes(type)
     );
 
-    const selected = filtered.length > 0
-      ? filtered[Math.floor(Math.random() * filtered.length)]
-      : { name: 'klang' };
+    // Function to pick a random Pokémon from a list that meets Pokédex ID <= 1025
+    async function pickValidPokemon(pokemonList) {
+      // Shuffle the list to randomize
+      const shuffled = pokemonList.sort(() => 0.5 - Math.random());
+
+      for (const pkm of shuffled) {
+        const pokeRes = await fetch(pkm.url);
+        if (!pokeRes.ok) continue; // skip if fetch failed
+
+        const pokeData = await pokeRes.json();
+        if (pokeData.id <= 1025) {
+          return pkm; // valid Pokémon found
+        }
+      }
+      return null; // none found under 1026
+    }
+
+    // Pick from filtered list first
+    let selected = await pickValidPokemon(filtered);
+
+    // If none found in filtered, try allPokémon list
+    if (!selected) {
+      selected = await pickValidPokemon(allPokemon);
+    }
+
+    // If still none found, fallback to klang
+    if (!selected) {
+      selected = { name: 'klang' };
+    }
 
     window.location.href = `results.html?pokemon=${selected.name}`;
   } catch (error) {
@@ -56,7 +78,3 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
     window.location.href = `results.html?pokemon=klang`;
   }
 });
-
-
-
-
