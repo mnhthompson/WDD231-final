@@ -1,4 +1,3 @@
-
 const environmentTypeMap = {
   forest: "grass",
   mountains: "rock",
@@ -28,46 +27,62 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
 
   const type = environmentTypeMap[environment] || "steel";
 
-  const userAnswers = { type , trait };
+  const userAnswers = { environment, type, trait, color };
   localStorage.setItem('quizAnswers', JSON.stringify(userAnswers));
 
   try {
-    const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    // Fetch Pokémon by type
+    const typeRes = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+    const typeData = await typeRes.json();
+    const typePokemon = typeData.pokemon.map(p => p.pokemon); 
 
-    const typeData = await res.json();
-    const allPokemon = typeData.pokemon.map(p => p.pokemon); // array of { name, url }
+    // Fetch Pokémon by color
+    const colorRes = await fetch(`https://pokeapi.co/api/v2/pokemon-color/${color}`);
+    const colorData = await colorRes.json();
+    const colorPokemon = colorData.pokemon_species.map(species => {
+      // The color endpoint returns species, we need to convert to Pokémon endpoint url
+      const id = species.url.split('/').filter(Boolean).pop();
+      return {
+        name: species.name,
+        url: `https://pokeapi.co/api/v2/pokemon/${id}/`
+      };
+    });
 
-    // Filter by type included in name 
-    const filtered = allPokemon.filter(pokemon =>
-      pokemon.name.includes(type)
-    );
+    // Find intersection by name (Pokémon that are both type and color)
+    const typeNames = new Set(typePokemon.map(p => p.name));
+    const intersectPokemon = colorPokemon.filter(p => typeNames.has(p.name));
 
-    // Function to pick a random Pokémon from a list that meets Pokédex ID <= 1025
+    // Function to pick a valid Pokémon (id <= 1025)
     async function pickValidPokemon(pokemonList) {
-      // Shuffle the list to randomize
       const shuffled = pokemonList.sort(() => 0.5 - Math.random());
 
       for (const pkm of shuffled) {
-        const pokeRes = await fetch(pkm.url);
-        if (!pokeRes.ok) continue; // skip if fetch failed
+        try {
+          const pokeRes = await fetch(pkm.url);
+          if (!pokeRes.ok) continue;
 
-        const pokeData = await pokeRes.json();
-        if (pokeData.id <= 1025) {
-          return pkm; // valid Pokémon found
+          const pokeData = await pokeRes.json();
+          if (pokeData.id <= 1025) {
+            return pkm;
+          }
+        } catch {
+          continue;
         }
       }
-      return null; // none found under 1026
+      return null;
     }
 
-    // Pick from filtered list first
-    let selected = await pickValidPokemon(filtered);
+    // Pick from intersection list first, fallback to type list, fallback to color list
+    let selected = await pickValidPokemon(intersectPokemon);
 
-    // If none found in filtered, try allPokémon list
     if (!selected) {
-      selected = await pickValidPokemon(allPokemon);
+      selected = await pickValidPokemon(typePokemon);
     }
 
-    // If still none found, fallback to klang
+    if (!selected) {
+      selected = await pickValidPokemon(colorPokemon);
+    }
+
     if (!selected) {
       selected = { name: 'klang' };
     }
