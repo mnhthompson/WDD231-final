@@ -28,11 +28,13 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
   const trait = form.trait.value.trim().toLowerCase();
   const color = form.color.value.trim().toLowerCase();
 
-  const userAnswers = { environment, trait };
+  const type = environmentTypeMap[environment] || "steel"; // fallback if map fails
+
+  const userAnswers = { type , trait };
   localStorage.setItem('quizAnswers', JSON.stringify(userAnswers));
 
 
-  const type = environmentTypeMap[environment] || "steel"; // fallback if map fails
+  
 
 
   try {
