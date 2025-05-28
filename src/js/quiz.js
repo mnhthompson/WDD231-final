@@ -40,7 +40,7 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
   try {
     // Fetch full Pokémon list (names and URLs)
     const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
-    const data = await res.json();
+    const typeData = await res.json();
     const allPokemon =  typeData.pokemon.map(p => p.pokemon);
 
     // Flexible filtering logic: checks if name contains either value
