@@ -3,11 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pokémon Result</title>
-  
-  <script type="module" crossorigin src="/assets/results-B5GsJFHl.js"></script>
+  <title>Pokémon Result</title>
+
+     <meta name="description" content="Pokemon Quiz">
+     <meta name="author" content="Marcus Thompson">
+      <link rel="icon" href="https://github.com/mnhthompson/WDD231-final/blob/main/image/Ultra.png" type="image/png">
+  
+
+     <!-- Social Media Meta: New-->
+     <meta property="og:title" content="Pokemon Quiz">
+     <meta property="og:type" content="website" />
+     <meta property="og:description" content="Pokemon Quiz for wdd 231">
+     <meta property="og:image" content="https://github.com/mnhthompson/WDD231-final/blob/main/image/pichu.jpg">
+     <meta property="og:url" content="https://wdd231final.netlify.app/">
+     <meta name="twitter:card" content="summary_large_image">
+
+
+  <script type="module" crossorigin src="/assets/results-BTMc61km.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="stylesheet" crossorigin href="/assets/style-C45k2GgS.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-D5RxNGLs.css">
 </head>
 <body>
   <header>
@@ -17,11 +31,27 @@
   <main>
     <section id="pokemon-result"></section>
 
-    <section>
-      <h2>Your Previous Results</h2>
-      <ul id="previous-results-list"></ul>
-    </section>
+  
+
+        <!-- Previous Results Container -->
+    <div class="previous-results">
+      <!-- Mobile Dropdown -->
+      <div class="mobile-dropdown">
+        <button id="dropdownToggle" aria-label="View Previous Pokémon">
+          <img src="image/Ultra.png" alt="Open previous Pokémon" />
+        </button>
+        <select id="previousDropdown" class="hidden"></select>
+      </div>
+
+      <!-- Desktop Grid -->
+      <div class="desktop-grid" id="previousGrid"></div>
+    </div>
+
+
+
   </main>
+
+
 
 </body>
 </html>

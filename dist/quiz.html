@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon Personality Quiz</title>
-  <script type="module" crossorigin src="/assets/quiz-DiTtrj4n.js"></script>
+  
+  <!-- Dev Notes: Meta, Icons, Social Sharing -->
+  <meta name="description" content="Pokemon Quiz">
+  <meta name="author" content="Marcus Thompson">
+  <link rel="icon" href="https://github.com/mnhthompson/WDD231-final/blob/main/image/Ultra.png" type="image/png">
+
+  <!-- Social Media Meta: New -->
+  <meta property="og:title" content="Pokemon Quiz">
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Pokemon Quiz for wdd 231">
+  <meta property="og:image" content="https://github.com/mnhthompson/WDD231-final/blob/main/image/pichu.jpg">
+  <meta property="og:url" content="https://wdd231final.netlify.app/">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="module" crossorigin src="/assets/quiz-BVptS-sg.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
-  <link rel="stylesheet" crossorigin href="/assets/style-C45k2GgS.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-D5RxNGLs.css">
 </head>
 <body>
   <header>
@@ -14,55 +27,60 @@
   </header>
 
   <main class="quiz-container">
-    <form id="quizForm">
-<label>What's your ideal environment?
-  <select name="environment">
-    <option value="forest">Forest</option> <!-- Grass type -->
-    <option value="mountains">Mountains</option> <!-- Rock type -->
-    <option value="ocean">Ocean</option> <!-- Water type -->
-    <option value="city">City</option> <!-- Electric type -->
-    <option value="desert">Desert</option> <!-- Ground type -->
-    <option value="cave">Cave</option> <!-- Dark type -->
-    <option value="swamp">Swamp</option> <!-- Poison type -->
-    <option value="plains">Plains</option> <!-- Normal type -->
-    <option value="tundra">Tundra</option> <!-- Ice type -->
-    <option value="jungle">Jungle</option> <!-- Bug type -->
-    <option value="volcano">Volcano</option> <!-- Fire type -->
-    <option value="river">Cliffs</option> <!-- Flying type -->
-    <option value="beach">Forest Alcove</option> <!-- Fairy type -->
-    <option value="grassland">Grassland</option> <!-- Fighting type -->
-    <option value="urban">Urban</option> <!-- Steel type -->
-    <option value="mountain_peak">Mountain Peak</option> <!-- Psychic type -->
-  </select>
-</label>
+    <form id="quizForm" novalidate>
+      
+      <!-- Q1: Environment -->
+      <label for="environment">What's your ideal environment?</label>
+      <select id="environment" name="environment" required>
+        <option value="" disabled selected>Select one</option>
+        <option value="forest">Forest</option> <!-- Grass type -->
+        <option value="mountains">Mountains</option> <!-- Rock type -->
+        <option value="ocean">Ocean</option> <!-- Water type -->
+        <option value="city">City</option> <!-- Electric type -->
+        <option value="desert">Desert</option> <!-- Ground type -->
+        <option value="cave">Cave</option> <!-- Dark type -->
+        <option value="swamp">Swamp</option> <!-- Poison type -->
+        <option value="plains">Plains</option> <!-- Normal type -->
+        <option value="tundra">Tundra</option> <!-- Ice type -->
+        <option value="jungle">Jungle</option> <!-- Bug type -->
+        <option value="volcano">Volcano</option> <!-- Fire type -->
+        <option value="river">Cliffs</option> <!-- Flying type -->
+        <option value="beach">Forest Alcove</option> <!-- Fairy type -->
+        <option value="grassland">Grassland</option> <!-- Fighting type -->
+        <option value="urban">Urban</option> <!-- Steel type -->
+        <option value="mountain_peak">Mountain Peak</option> <!-- Psychic type -->
+      </select>
 
+      <!-- Q2: Personality -->
+      <label for="trait">Pick a personality trait:</label>
+      <select id="trait" name="trait" required>
+        <option value="" disabled selected>Select one</option>
+        <option value="brave">Brave</option>
+        <option value="calm">Calm</option>
+        <option value="playful">Playful</option>
+        <option value="loyal">Loyal</option>
+      </select>
 
-
-      <label>Pick a personality trait:
-        <select name="trait">
-          <option value="brave">Brave</option>
-          <option value="calm">Calm</option>
-          <option value="playful">Playful</option>
-          <option value="loyal">Loyal</option>
-        </select>
-      </label>
-
-      <label>Choose your favorite color:
-        <select name="color">
-          <option value="red">Red</option>
+      <!-- Q3: Favorite Color -->
+      <label for="color">Choose your favorite color:</label>
+        <select id="color" name="color" required>
+          <option value="" disabled selected>Select a color</option>
+          <option value="black">Black</option>
           <option value="blue">Blue</option>
+          <option value="brown">Brown</option>
+          <option value="gray">Gray</option>
           <option value="green">Green</option>
+          <option value="pink">Pink</option>
+          <option value="purple">Purple</option>
+          <option value="red">Red</option>
+          <option value="white">White</option>
           <option value="yellow">Yellow</option>
         </select>
-      </label>
 
-      <button type="submit">Find My Pokémon!</button>
-       <a href="results.html" class="nav-btn">Find My results page fake</a>
+      <button type="submit" aria-label="Submit quiz">Find My Pokémon!</button>
     </form>
 
-    <div id="result" class="result"></div>
+    <div id="result" class="result" aria-live="polite"></div>
   </main>
-
- 
 </body>
 </html>
