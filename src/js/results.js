@@ -157,3 +157,11 @@ async function main() {
 }
 
 window.addEventListener('DOMContentLoaded', main);
+
+const dropdown = document.getElementById("previousDropdown");
+const grid = document.getElementById("previousGrid");
+
+if (!dropdown || !grid) {
+  console.error("Dropdown or Grid container missing from HTML.");
+  return;
+}
