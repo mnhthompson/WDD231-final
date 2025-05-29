@@ -77,3 +77,50 @@
     align-items: center;
   }
 }
+
+.previous-results {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+/* Mobile Styles */
+.mobile-dropdown {
+  display: none;
+  text-align: center;
+}
+.mobile-dropdown img {
+  width: 60px;
+  cursor: pointer;
+}
+.mobile-dropdown select {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Desktop Styles */
+.desktop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+.desktop-grid img {
+  width: 80px;
+  transition: transform 0.2s;
+}
+.desktop-grid img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Switch */
+@media (max-width: 768px) {
+  .desktop-grid {
+    display: none;
+  }
+  .mobile-dropdown {
+    display: block;
+  }
+  .hidden {
+    display: none;
+  }
+}

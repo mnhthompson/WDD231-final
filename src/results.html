@@ -30,11 +30,27 @@
   <main>
     <section id="pokemon-result"></section>
 
-    <section>
-      <h2>Your Previous Results</h2>
-      <ul id="previous-results-list"></ul>
-    </section>
+  
+
+        <!-- Previous Results Container -->
+    <div class="previous-results">
+      <!-- Mobile Dropdown -->
+      <div class="mobile-dropdown">
+        <button id="dropdownToggle" aria-label="View Previous Pokémon">
+          <img src="image/Ultra.png" alt="Open previous Pokémon" />
+        </button>
+        <select id="previousSelect" class="hidden"></select>
+      </div>
+
+      <!-- Desktop Grid -->
+      <div class="desktop-grid" id="previousGrid"></div>
+    </div>
+
+
+
   </main>
+
+
 
 </body>
 </html>
