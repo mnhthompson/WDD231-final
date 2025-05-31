@@ -1,0 +1,22 @@
+body {
+  background-color: var(--cream-bg);
+  font-family: var(--bs-font-family-header);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+body h2 {
+  font-family: var(--bs-font-family-header);
+}
+
+main {
+  font-family: var(--bs-font-family-header);
+  font-size: 1em;
+}
+
+
+
+
+
