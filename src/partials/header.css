@@ -1,9 +1,0 @@
-header {
-  background-color: var(--primary-color);
-  color: var(--cream-bg);
-}
-
-nav button:hover {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-}

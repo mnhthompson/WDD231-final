@@ -1,0 +1,14 @@
+:root {
+  --primary-color: #3b4cca;       /* Deep Blue (Pokémon Blue) */
+  --secondary-color: #ffcb05;     /* Pokémon Yellow */
+  --cream-bg: #fdf5e6;            /* Cream background */
+  --text-color: #222222;
+  --light-gray: #eeeeee;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --bs-gradient: linear-gradient(to right, #ffd014, #f7c026, #e1a500);
+  --border-radius: 10px;
+  --transition-fast: 0.3s ease-in-out;
+  --bs-box-shadow: 0 4px 6px rgba(0, 0, 0, .5);
+  --bs-link-hover-color:#2a2fa1; 
+  --bs-font-family-header: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
