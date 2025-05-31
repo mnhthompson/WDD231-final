@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokémon Personality Quiz</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/quiz.css" />
   <script type="module" src="js/quiz.js" defer></script>
   
   <!-- Dev Notes: Meta, Icons, Social Sharing -->
@@ -29,6 +29,7 @@
     <form id="quizForm" novalidate>
       
       <!-- Q1: Environment -->
+       <div class="form-row">
       <label for="environment">What's your ideal environment?</label>
       <select id="environment" name="environment" required>
         <option value="" disabled selected>Select one</option>
@@ -49,8 +50,10 @@
         <option value="urban">Urban</option> <!-- Steel type -->
         <option value="mountain_peak">Mountain Peak</option> <!-- Psychic type -->
       </select>
+      </div>
 
       <!-- Q2: Personality -->
+       <div class="form-row">
       <label for="trait">Pick a personality trait:</label>
       <select id="trait" name="trait" required>
         <option value="" disabled selected>Select one</option>
@@ -59,8 +62,10 @@
         <option value="playful">Playful</option>
         <option value="loyal">Loyal</option>
       </select>
+      </div>
 
       <!-- Q3: Favorite Color -->
+       <div class="form-row">
       <label for="color">Choose your favorite color:</label>
         <select id="color" name="color" required>
           <option value="" disabled selected>Select a color</option>
@@ -75,8 +80,10 @@
           <option value="white">White</option>
           <option value="yellow">Yellow</option>
         </select>
-
-      <button type="submit" aria-label="Submit quiz">Find My Pokémon!</button>
+        </div>
+      <div class="form-row">
+        <button type="submit" aria-label="Submit quiz">Find My Pokémon!</button>
+      </div>
     </form>
 
     <div id="result" class="result" aria-live="polite"></div>
