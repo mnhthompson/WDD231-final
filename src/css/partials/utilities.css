@@ -21,4 +21,20 @@
   font-size: 1.1rem;
   line-height: 1.6;
   color: #333;
+
+  background-image: url('images/ultra.png');
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position: bottom right;
+  background-blend-mode: lighten;
+}
+
+.intro-box img {
+  max-width: 120px;
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid #3b4cca;
+}
+.intro-box p {
+  margin: 0;
 }
