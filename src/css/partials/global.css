@@ -17,6 +17,22 @@ main {
 }
 
 
+.pokemon-carousel {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+
+.pokemon-slot {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
 
 
 
