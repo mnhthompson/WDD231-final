@@ -10,7 +10,10 @@ const links = [
   document.getElementById("link3")
 ];
 
-let currentIndexes = [1, 4, 7]; // Start with 3 different Pokémon
+// Generate a random Pokémon ID (between 1 and 1025)
+function getRandomPokemonId() {
+  return Math.floor(Math.random() * 1025) + 1;
+}
 
 // Fetch and update a Pokémon slot and its link
 async function updatePokemonSlot(slot, id, link) {
@@ -35,11 +38,11 @@ async function updatePokemonSlot(slot, id, link) {
   }
 }
 
-// Cycle through Pokémon IDs and update slots
+// Randomly assign new Pokémon to each slot
 function cyclePokemon() {
   slots.forEach((slot, i) => {
-    currentIndexes[i] = (currentIndexes[i] + 1) % 1025 || 1;
-    updatePokemonSlot(slot, currentIndexes[i], links[i]);
+    const randomId = getRandomPokemonId();
+    updatePokemonSlot(slot, randomId, links[i]);
   });
 }
 
