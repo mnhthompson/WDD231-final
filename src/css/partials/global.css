@@ -14,7 +14,9 @@ body h2 {
 main {
   font-family: var(--bs-font-family-header);
   font-size: 1em;
+  color: var(--text-color);
 }
+
 
 
 .pokemon-carousel {
