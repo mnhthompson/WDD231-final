@@ -57,24 +57,7 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
     const intersectPokemon = colorPokemon.filter(p => typeNames.has(p.name));
 
     // Function to pick a valid Pokémon (id <= 1025)
-    async function pickValidPokemon(pokemonList) {
-      const shuffled = pokemonList.sort(() => 0.5 - Math.random());
 
-      for (const pkm of shuffled) {
-        try {
-          const pokeRes = await fetch(pkm.url);
-          if (!pokeRes.ok) continue;
-
-          const pokeData = await pokeRes.json();
-          if (pokeData.id <= 1025) {
-            return pkm;
-          }
-        } catch {
-          continue;
-        }
-      }
-      return null;
-    }
 
     // Pick from intersection list first, fallback to type list, fallback to color list
     let selected = await pickValidPokemon(intersectPokemon);
