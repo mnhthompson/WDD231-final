@@ -138,6 +138,7 @@
     border: none;
     padding: 1rem;
     cursor: pointer;
+    z-index: 1;
   }
 
   .mobile-menu-button img {
