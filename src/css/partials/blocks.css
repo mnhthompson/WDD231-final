@@ -148,6 +148,10 @@
   .mobile-menu {
     display: none;
     position: absolute;
+    
+  }
+
+  .mobile-menu.show {
     top: 60px;
     right: 16px;
     background-color: white;
@@ -157,11 +161,7 @@
     padding: 0.5rem 1rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 1000;
-    
-  }
 
-  .mobile-menu.show {
-    display: block;
   }
 
   .mobile-menu li {
