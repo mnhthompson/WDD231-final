@@ -139,7 +139,13 @@
     padding: 1rem;
     cursor: pointer;
     z-index: 1;
+    position: absolute;
+    top: 10px;
+    left: 16px; 
+    z-index: 1100; 
   }
+
+
 
   .mobile-menu-button img {
     width: 40px;
