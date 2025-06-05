@@ -1,4 +1,5 @@
 
+    
     import { runQuiz } from './quiz.js';
     
     const allFilter = async (pokemonList) => {
@@ -8,7 +9,7 @@
           const pokeRes = await fetch(pkm.url);
           if (!pokeRes.ok) continue;
           const pokeData = await pokeRes.json();
-          if (pokeData.id <= 151) return pkm;
+          if (pokeData.id <= 1025) return pkm;
         } catch {
           continue;
         }

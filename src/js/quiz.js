@@ -56,7 +56,7 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
     const typeNames = new Set(typePokemon.map(p => p.name));
     const intersectPokemon = colorPokemon.filter(p => typeNames.has(p.name));
 
-    // Function to pick a valid Pokémon (id <= 1025)
+  
 
 
     // Pick from intersection list first, fallback to type list, fallback to color list
@@ -81,3 +81,4 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
   }
 });
 }
+
