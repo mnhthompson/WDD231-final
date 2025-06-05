@@ -147,7 +147,7 @@
 
   .mobile-menu {
     display: none;
-    position: absolute;
+    position: relative;
     visibility: hidden;
     
   }
