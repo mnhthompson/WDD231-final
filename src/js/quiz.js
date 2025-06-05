@@ -1,3 +1,7 @@
+
+
+export function runQuiz(pickValidPokemon) {
+
 const environmentTypeMap = {
   forest: "grass",
   mountains: "rock",
@@ -93,3 +97,4 @@ document.getElementById('quizForm').addEventListener('submit', async function (e
     window.location.href = `results.html?pokemon=klang`;
   }
 });
+}
