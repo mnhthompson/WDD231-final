@@ -136,7 +136,7 @@
     display: inline-block;
     background: none;
     border: none;
-    padding: 5rem;
+    padding: 2rem;
     cursor: pointer;
   }
 
@@ -157,6 +157,7 @@
     padding: 0.5rem 1rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 1000;
+    
   }
 
   .mobile-menu.show {
@@ -169,6 +170,6 @@
 
   .mobile-menu a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
   }
 }
