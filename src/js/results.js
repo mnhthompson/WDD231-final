@@ -162,3 +162,13 @@ const dropdown = document.getElementById("previousDropdown");
 const grid = document.getElementById("previousGrid");
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  if (toggleBtn && menu) {
+    toggleBtn.addEventListener("click", () => {
+      menu.classList.toggle("show");
+    });
+  }
+});

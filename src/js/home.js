@@ -49,3 +49,14 @@ function cyclePokemon() {
 // Start carousel
 cyclePokemon();
 setInterval(cyclePokemon, 5000);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  if (toggleBtn && menu) {
+    toggleBtn.addEventListener("click", () => {
+      menu.classList.toggle("show");
+    });
+  }
+});
